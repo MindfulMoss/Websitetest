@@ -120,12 +120,23 @@
         <h2 style="text-align: center;">QR Code</h2> 
         <!-- Your QR code content goes here -->
         <div style="text-align: center;">
-            <img src="qr-img.png" alt="QR Code" style="max-width: 200px; max-height: 200px; margin: auto;">
+            <img id="qrCodeImage" src="qr-img.png" alt="QR Code" style="max-width: 200px; max-height: 200px; margin: auto;">
+        </div>
+        <div style="text-align: center;">
+            <h3>Number of Pax: <span id="numberOfPax">0</span></h3>
+        </div>
+        <div style="text-align: center;">
+            <input type="text" id="nameInput" placeholder="Enter your name">
+        </div>
+        <div style="text-align: center;">
+            <input type="text" id="phoneInput" placeholder="Enter your phone number">
         </div>
         <br>
-        <div>
-            <h3> Name input: </h3><h3> Phone Number:</h3>
+        <div style="text-align: center;">
+            <button onclick="validatePhoneNumber()">Confirm</button>
         </div>
+
+
     </div>
     
 
@@ -139,8 +150,8 @@
     <!-- Floating container for Gift -->
     <div class="floating-container" id="giftfloatingContainer">
         <h2>Gift</h2>
-        <!-- Your QR code content goes here -->
-        <img src="your-qr-code-image.png" alt="Gift">
+        <!-- Your website content goes here -->
+
     </div>
 
     <!-- Floating container for Chat -->
@@ -153,35 +164,131 @@
     <!-- Floating container for RSVP -->
     <div class="floating-container" id="rsvpfloatingContainer">
         <h2>RSVP</h2>
-        <!-- Your QR code content goes here -->
-        <img src="your-qr-code-image.png" alt="RSVP">
+        <div>
+            <button onclick="sendRSVP('yes')">Yes</button>
+            <button onclick="sendRSVP('no')">No</button>
+        </div>
+    </div>
+
+    <div class="floating-container" id="newContainer">
+        <h2>RSVP - Credentials</h2>
+        <div>
+            <h3>Name:</h3>
+            <input type="text" id="rsvpNameInput" placeholder="Enter your name">
+            <h3>Phone Number:</h3>
+            <input type="text" id="rsvpPhoneInput" placeholder="Enter your phone number">
+            <h3>Number of Guests:</h3>
+            <select id="rsvpGuestInput">
+                <option value="1">1 guest</option>
+                <option value="2">2 guests</option>
+                <option value="3">3 guests</option>
+            </select>
+            <br> <br>
+            <button onclick="submitRSVP()">Submit RSVP</button>
+        </div>
     </div>
 
     <script>
         function toggleFloatingContainer(containerId) {
             var container = document.getElementById(containerId);
-            if (container.style.display === 'block') {
-                container.style.display = 'none';
-            } else {
+            if (window.getComputedStyle(container).display === 'none') {
                 closeAllFloatingContainers();
                 container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
             }
         }
-
+    
         function closeAllFloatingContainers() {
             var containers = document.getElementsByClassName('floating-container');
             for (var i = 0; i < containers.length; i++) {
                 containers[i].style.display = 'none';
             }
         }
-
+    
         document.addEventListener('click', function(event) {
             var target = event.target;
             var buttonContainer = document.querySelector('.button-container');
+            var floatingContainers = document.querySelectorAll('.floating-container');
             if (!buttonContainer.contains(target)) {
-                closeAllFloatingContainers();
+                var clickedInsideContainer = false;
+                floatingContainers.forEach(function(container) {
+                    if (container.contains(target)) {
+                        clickedInsideContainer = true;
+                    }
+                });
+                if (!clickedInsideContainer) {
+                    closeAllFloatingContainers();
+                }
             }
         });
+    
+        function validatePhoneNumber() {
+            var name = document.getElementById('nameInput').value;
+            var phoneNumber = document.getElementById('phoneInput').value;
+
+            // Make a request to the API endpoint
+            var apiUrl = `https://myp3ktizwggb3izvza4gujuwvi0fqdox.lambda-url.ap-southeast-1.on.aws/phone_validate?name_input=${name}&num_input=${phoneNumber}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Extract the auth token and number of guests from the response
+                    var authToken = data.auth_token;
+                    var numberOfPax = data.guest_num;
+
+                    // Update the QR code with the received auth token
+                    updateQRCode(authToken);
+
+                    // Update the number of guests in the "Number of Pax" section
+                    document.getElementById('numberOfPax').textContent = numberOfPax;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function updateQRCode(authToken) {
+            // Construct the URL for the QR code using the auth token
+            var qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(authToken)}`;
+
+            // Update the QR code image source
+            document.getElementById('qrCodeImage').src = qrCodeUrl;
+
+            // Show the QR code container
+            document.getElementById('qrCodeImage').style.display = 'block';
+        }
+
+        // Function to reset input fields and QR code image source
+        function resetQRCodeContent() {
+            // Reset input fields
+            document.getElementById('nameInput').value = '';
+            document.getElementById('phoneInput').value = '';
+
+            // Reset QR code image source
+            document.getElementById('qrCodeImage').src = 'qr-img.png';
+        }
+
+        // Call the reset function when the page loads
+        window.onload = function() {
+            resetQRCodeContent();
+        };
+
+        function sendRSVP(response) {
+        // Get the RSVP floating container
+        var rsvpContainer = document.getElementById('rsvpfloatingContainer');
+        // Get the new container
+        var newContainer = document.getElementById('newContainer');
+
+        if (response === 'yes') {
+            // Hide the current RSVP floating container
+            rsvpContainer.style.display = 'none';
+
+            // Show the new container for name and phone number
+            newContainer.style.display = 'block';
+        } else if (response === 'no') {
+            // Handle RSVP for "No" response
+            // You can put your logic here
+        }
+    }
+
     </script>
 </body>
 </html>
