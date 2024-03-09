@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alex+Brush&display=swap">
     <title>Scrollable Page with Fixed Button</title>
     <style>
         body {
@@ -80,18 +81,83 @@
             border-radius: 20px;
         }
 
+        #section1 {
+            background-image: url('bg_1.png');
+            /* Add other background properties as needed */
+            
+        }
+
+        #section2 {
+            background-image: url('bg_1.png');
+            /* Add other background properties as needed */
+        }
+
+        #section3 {
+            background-image: url('bg_1.png');
+            /* Add other background properties as needed */
+        }
+
+
+        #section1 .content1 {
+            font-family: 'Alex Brush', cursive;
+            text-align: center; /* Center align content */
+            margin-top: 10px; /* Adjust margin top */
+            margin-bottom: 10px; /* Adjust margin bottom */
+            font-size: 24px; /* Adjust the font size as needed */
+            animation: fadeInAnimation 3s ease 1; /* Adjust animation duration and timing */
+        }
+
+        #section1 .content2 {
+            font-family: 'Garamond', serif;
+            text-align: center; /* Center align content */
+            margin-top: 150px; /* Remove margin top */
+            margin-bottom: 0; /* Remove margin bottom */
+            font-size: 10px; /* Adjust the font size as needed */
+        }
+
+        #section1 .content3 {
+            font-family: 'Garamond', serif;
+            text-align: center; /* Center align content */
+            margin-top: 10px; /* Remove margin top */
+            margin-bottom: 0; /* Remove margin bottom */
+            font-size: 10px; /* Adjust the font size as needed */
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+
     </style>
 </head>
 <body>
-    <div class="section">
-        <div class="content">
-            <h1>Section 1</h1>
-            <p>This is the content of section 1.</p>
-            <p>Scroll down to explore more.</p>
+    <div class="section" id="section1">
+        <div class="content2" >
+            <h1>Walimatul Urus</h1>
         </div>
+
+        <div class="content1" >
+            <h1>Amirul</h1>
+            <h2>&</h2>
+            <h1>Shazwaney</h1>
+            <!-- <p>This is the content of section 1.</p> -->
+            <!-- <p>Scroll down to explore more.</p> -->
+        </div>
+
+        <div class="content3" >
+            <h1>Jumaat 23.6.2023</h1>
+        </div>
+
     </div>
 
-    <div class="section">
+
+
+    <div class="section"  id="section2">
         <div class="content">
             <h1>Section 2</h1>
             <p>This is the content of section 2.</p>
@@ -99,7 +165,7 @@
         </div>
     </div>
 
-    <div class="section">
+    <div class="section"  id="section3">
         <div class="content">
             <h1>Section 3</h1>
             <p>This is the content of section 3.</p>
@@ -111,8 +177,8 @@
         <button id="phoneButton" onclick="toggleFloatingContainer('phonefloatingContainer')"><i class='bx bx-phone'></i></button>
         <button id="rsvpButton" onclick="toggleFloatingContainer('rsvpfloatingContainer')"><img src="rsvp-icon.webp" alt="RSVP Icon"></button>
         <button id="qrButton" onclick="toggleFloatingContainer('qrfloatingContainer')"><i class='bx bx-qr'></i></button>
-        <button id="giftButton" onclick="toggleFloatingContainer('giftfloatingContainer')"><i class='bx bxs-gift' ></i></button>
-        <button id="chatButton" onclick="toggleFloatingContainer('chatfloatingContainer')"><i class='bx bxs-chat'></i></button>
+        <button id="giftButton" onclick="toggleFloatingContainer('giftfloatingContainer')"><i class='bx bx-gift' ></i></button>
+        <button id="chatButton" onclick="toggleFloatingContainer('chatfloatingContainer')"><i class='bx bx-chat'></i></button>
     </div>
 
     <!-- Floating container for QR code -->
@@ -130,6 +196,9 @@
         </div>
         <div style="text-align: center;">
             <input type="text" id="phoneInput" placeholder="Enter your phone number">
+        </div>
+        <div style="text-align: center;">
+            <input type="text" id="rsvpPhoneInput" placeholder="Event ID">
         </div>
         <br>
         <div style="text-align: center;">
@@ -183,7 +252,8 @@
                 <option value="2">2 guests</option>
                 <option value="3">3 guests</option>
             </select>
-            <br> <br>
+           
+            <br><br> <input type="text" id="rsvpPhoneInput" placeholder="Event ID"> <br><br>
             <button onclick="submitRSVP()">Submit RSVP</button>
         </div>
     </div>
