@@ -270,7 +270,7 @@
             <input type="text" id="phoneInput" placeholder="Enter your phone number">
         </div>
         <div style="text-align: center;">
-            <input type="text" id="rsvpPhoneInput" placeholder="Event ID">
+            <input type="text" id="eventId" placeholder="Event ID">
         </div>
         <br>
         <div style="text-align: center;">
@@ -325,8 +325,8 @@
                 <option value="3">3 guests</option>
             </select>
            
-            <br><br> <input type="text" id="rsvpPhoneInput" placeholder="Event ID"> <br><br>
-            <button onclick="submitRSVP()">Submit RSVP</button>
+            <br><br> <input type="text" id="eventId" placeholder="Event ID"> <br><br>
+            <button onclick="rsvpAttend()">Submit RSVP</button>
         </div>
     </div>
 
@@ -368,23 +368,71 @@
         function validatePhoneNumber() {
             var name = document.getElementById('nameInput').value;
             var phoneNumber = document.getElementById('phoneInput').value;
+            var eventId = document.getElementById('eventId').value;
+            
+            // Construct the request body
+            var requestBody = {
+                event_id: eventId,
+                name: name,
+                phone_number: phoneNumber
+            };
 
-            // Make a request to the API endpoint
-            var apiUrl = `https://myp3ktizwggb3izvza4gujuwvi0fqdox.lambda-url.ap-southeast-1.on.aws/phone_validate?name_input=${name}&num_input=${phoneNumber}`;
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    // Extract the auth token and number of guests from the response
-                    var authToken = data.auth_token;
-                    var numberOfPax = data.guest_num;
+            // Make a POST request to the API endpoint
+            var apiUrl = 'https://myp3ktizwggb3izvza4gujuwvi0fqdox.lambda-url.ap-southeast-1.on.aws/phone_validate';
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Extract the auth token and number of guests from the response
+                var authToken = data.auth_token;
+                var numberOfPax = data.guest_num;
 
-                    // Update the QR code with the received auth token
-                    updateQRCode(authToken);
+                // Update the QR code with the received auth token
+                updateQRCode(authToken);
 
-                    // Update the number of guests in the "Number of Pax" section
-                    document.getElementById('numberOfPax').textContent = numberOfPax;
-                })
-                .catch(error => console.error('Error:', error));
+                // Update the number of guests in the "Number of Pax" section
+                document.getElementById('numberOfPax').textContent = numberOfPax;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function rsvpAttend() {
+            var name = document.getElementById('rsvpNameInput').value;
+            var phoneNumber = document.getElementById('rsvpPhoneInput').value;
+            var guestCount = document.getElementById('rsvpGuestInput').value;
+            var eventId = document.getElementById('eventId').value;
+            
+            // Construct the request body
+            var requestBody = {
+                event_id: eventId,
+                name: name,
+                phone_number: phoneNumber,
+                guest: parseInt(guestCount) // Parse guest count as an integer
+            };
+
+            // Make a POST request to the API endpoint
+            var apiUrl = 'https://myp3ktizwggb3izvza4gujuwvi0fqdox.lambda-url.ap-southeast-1.on.aws/attend_rsvp';
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Extract the message from the response
+                var message = data.message;
+
+                // Display the message to the user
+                alert(message);
+            })
+            .catch(error => console.error('Error:', error));
         }
 
         function updateQRCode(authToken) {
@@ -425,6 +473,7 @@
 
             // Show the new container for name and phone number
             newContainer.style.display = 'block';
+
         } else if (response === 'no') {
             // Handle RSVP for "No" response
             // You can put your logic here
