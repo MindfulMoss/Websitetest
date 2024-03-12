@@ -325,7 +325,7 @@
                 <option value="3">3 guests</option>
             </select>
            
-            <br><br> <input type="text" id="eventId" placeholder="Event ID"> <br><br>
+            <br><br> <input type="text" id="eventId2" placeholder="Event ID"> <br><br>
             <button onclick="rsvpAttend()">Submit RSVP</button>
         </div>
     </div>
@@ -368,7 +368,7 @@
         function validatePhoneNumber() {
             var name = document.getElementById('nameInput').value;
             var phoneNumber = document.getElementById('phoneInput').value;
-            var eventId = document.getElementById('eventId').value;
+            var eventId = document.getElementById('eventId2').value;
             
             // Construct the request body
             var requestBody = {
