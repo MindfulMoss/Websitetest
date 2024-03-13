@@ -297,9 +297,11 @@
 
     <!-- Floating container for Chat -->
     <div class="floating-container" id="chatfloatingContainer">
-        <h2>Chat</h2>
-        <!-- Your QR code content goes here -->
-        <img src="your-qr-code-image.png" alt="Chat">
+        <h2>Wishes</h2>
+        <!-- Input field for event_id -->
+        <input type="text" id="eventIdInput" placeholder="Enter Event ID">
+        <button onclick="getWishList()">Get Wishes</button>
+        <!-- Wish list will be displayed here -->
     </div>
 
     <!-- Floating container for RSVP -->
@@ -324,7 +326,9 @@
                 <option value="2">2 guests</option>
                 <option value="3">3 guests</option>
             </select>
-           
+            <h3>Wishes:</h3>
+            <input type="text" id="rsvpWishInput" placeholder="Enter your wish">
+
             <br><br> <input type="text" id="eventId2" placeholder="Event ID"> <br><br>
             <button onclick="rsvpAttend()">Submit RSVP</button>
         </div>
@@ -405,6 +409,7 @@
             var name = document.getElementById('rsvpNameInput').value;
             var phoneNumber = document.getElementById('rsvpPhoneInput').value;
             var guestCount = document.getElementById('rsvpGuestInput').value;
+            var wish = document.getElementById('rsvpWishInput').value;
             var eventId = document.getElementById('eventId2').value;
             
             // Construct the request body
@@ -412,7 +417,8 @@
                 event_id: eventId,
                 name: name,
                 phone_number: phoneNumber,
-                guest: parseInt(guestCount) // Parse guest count as an integer
+                guest: parseInt(guestCount), // Parse guest count as an integer
+                wish: wish
             };
 
             // Make a POST request to the API endpoint
@@ -480,24 +486,54 @@
         }
     }
 
-    // JavaScript function to trigger animation when section is in viewport
-    function triggerAnimation() {
-        var section = document.getElementById('section2');
-        var sectionPosition = section.getBoundingClientRect().top;
-        var screenHeight = window.innerHeight;
+        // JavaScript function to trigger animation when section is in viewport
+        function triggerAnimation() {
+            var section = document.getElementById('section2');
+            var sectionPosition = section.getBoundingClientRect().top;
+            var screenHeight = window.innerHeight;
 
-        if (sectionPosition < screenHeight) {
-            // Remove the animate class if it exists
-            section.classList.remove('animate');
-            // Add the animate class again to trigger the animation
-            section.classList.add('animate');
+            if (sectionPosition < screenHeight) {
+                // Remove the animate class if it exists
+                section.classList.remove('animate');
+                // Add the animate class again to trigger the animation
+                section.classList.add('animate');
+            }
         }
-    }
-            // Trigger animation when the page loads
-        window.onload = triggerAnimation;
+                // Trigger animation when the page loads
+            window.onload = triggerAnimation;
 
-        // Trigger animation when scrolling
-        window.addEventListener('scroll', triggerAnimation);
+            // Trigger animation when scrolling
+            window.addEventListener('scroll', triggerAnimation);
+
+        function getWishList() {
+            const eventId = document.getElementById("eventIdInput").value;
+            if (!eventId) {
+                alert("Please enter an Event ID");
+                return;
+            }
+            fetch(`https://myp3ktizwggb3izvza4gujuwvi0fqdox.lambda-url.ap-southeast-1.on.aws/wish_fetch/${eventId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Success!") {
+                    const chatFloatingContainer = document.getElementById("chatfloatingContainer");
+                    // Clear existing wish list before appending new wishes
+                    chatFloatingContainer.innerHTML = "<h2>Wishes</h2>";
+                    // Iterate over wishes and append them to the chatFloatingContainer
+                    data.wishes.forEach(wish => {
+                        const wishInfo = document.createElement("p");
+                        wishInfo.textContent = `${wish.name}: ${wish.wish}`;
+                        chatFloatingContainer.appendChild(wishInfo);
+                    });
+                } else {
+                    alert(data.detail);
+                    console.error("Error:", data.detail);
+                }
+            })
+            .catch(error => {
+                alert("Error fetching wish list. Please try again later.");
+                console.error("Error:", error);
+            });
+        }    
 
     </script>
 </body>
