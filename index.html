@@ -168,6 +168,33 @@
             }
         }
 
+        /* CSS for contact-info */
+        .contact-info {
+            display: flex;
+            justify-content: space-between; /* Align items with space between */
+            align-items: center; /* Align items vertically center */
+        }
+
+        /* CSS for image-box */
+        .image-box {
+            display: flex; /* Use flexbox layout */
+            align-items: center; /* Align items vertically center */
+            justify-content: space-between; /* Align items with space between */
+        }
+
+        /* CSS for image-box img */
+        .image-box img {
+            width: 150px; /* Set width of the image */
+            height: 150px; /* Set height of the image */
+        }
+
+        /* CSS for bx */
+        .bx {
+            margin-left: auto; /* Move the bx element to the right */
+            font-size: 24px;
+        }
+
+
 
     </style>
 </head>
@@ -284,15 +311,41 @@
     <!-- Floating container for Phone code -->
     <div class="floating-container" id="phonefloatingContainer">
         <h2>Contact</h2>
-        <!-- Your QR code content goes here -->
-        <img src="your-qr-code-image.png" alt="Contact">
+        <div class="contact-info">
+            <h3>Jason</h3>
+            <a href="https://wa.me/1234567890"> <!-- Replace 1234567890 with the actual phone number -->
+                <i class='bx bxl-whatsapp' style='font-size: 24px'></i>
+            </a>
+        </div>
+
+        <div class="contact-info">
+            <h3>Mangum</h3>
+            <a href="https://wa.me/1234567890"> <!-- Replace 1234567890 with the actual phone number -->
+                <i class='bx bxl-whatsapp' style='font-size: 24px'></i>
+            </a>
+        </div>
     </div>
+
 
     <!-- Floating container for Gift -->
     <div class="floating-container" id="giftfloatingContainer">
         <h2>Gift</h2>
-        <!-- Your website content goes here -->
-
+        <div class="image-box">
+            <img src="test1.png" alt="Test Image">
+            <p1>Buy Now!</p1>
+        </div> <br>
+        <div class="image-box">
+            <img src="test1.png" alt="Test Image">
+            <p1>Buy Now!</p1>
+        </div> <br>
+        <div class="image-box">
+            <img src="test1.png" alt="Test Image">
+            <p1>Buy Now!</p1>
+        </div> <br>
+        <div class="image-box">
+            <img src="test1.png" alt="Test Image">
+            <p1>Buy Now!</p1>
+        </div>
     </div>
 
     <!-- Floating container for Chat -->
