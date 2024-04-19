@@ -8,7 +8,7 @@
     <title>Scrollable Page with Fixed Button</title>
     <style>
         body {
-            margin: 0;
+            margin-bottom: 70px;
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: #fff;
@@ -18,7 +18,7 @@
 
         .section {
             width: 100%;
-            height: 750px;
+            height: 670px;
             max-width: 400px;
             margin: 5px auto;
             padding: 20px;
@@ -37,6 +37,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
+            height: 50px;
             max-width: 400px;
             background-color: #c9d1d0;
             display: flex;
@@ -82,18 +83,18 @@
         }
 
         #section1 {
-            background-image: url('bg_1.png');
+            background-image: url('bg_3_4.png');
             /* Add other background properties as needed */
             
         }
 
         #section2 {
-            background-image: url('bg_2.png');
+            background-image: url('bg_3_5.png');
             /* Add other background properties as needed */
         }
 
         #section3 {
-            background-image: url('bg_2.png');
+            background-image: url('bg_3_5.png');
             /* Add other background properties as needed */
         }
 
@@ -128,7 +129,7 @@
         #section2 .content1 {
             font-family: 'Garamond', serif;
             text-align: center; /* Center align content */
-            margin-top: 50px; /* Remove margin top */
+            margin-top: 30px; /* Remove margin top */
             margin-bottom: 0; /* Remove margin bottom */
             font-size: 10px; /* Adjust the font size as needed */
             animation: fadeInAnimation 2s ease 1; /* Adjust animation duration and timing */
@@ -137,7 +138,7 @@
         #section2 .content2 {
             font-family: 'Garamond', serif;
             text-align: center; /* Center align content */
-            margin-top: 50px; /* Remove margin top */
+            margin-top: 40px; /* Remove margin top */
             margin-bottom: 0; /* Remove margin bottom */
             font-size: 12px; /* Adjust the font size as needed */
             animation: fadeInAnimation 2s ease 1; /* Adjust animation duration and timing */
@@ -221,53 +222,51 @@
     <div class="section"  id="section2">
         <div class="content1">
             <p>Walimatul Urus</p>
-            <br>
-            <h2>Rahmat Bin Yusoff</h2>
+            <p>Dengan rasa penuh kesyukuran, kami </p>
+            <h2 id="groomFatherName">Rahmat Bin Yusoff</h2>
             <h3>&</h3>
-            <h2>Nik Rami Hazlinda Binti Mohamed</h2>
+            <h2 id="brideFatherName">Nik Rami Hazlinda Binti Mohamed</h2>
             <br>
-            <p>Dengan penuh kesyukuran kami mempersilakan</p>
-            <p>Dato | Datin | Tuan | Puan | Encik | Cik </p>
-            <p>Seisi keluarga hadir ke majlis perkahwinan anakanda kami </p>
+            <p>Menjemput Dato/Datin/Tuan/Puan/Encik/Cik sekeluarga</p>
+            <p>Hadir ke majlis perkahwinan anakanda kami </p>
             <br>
-            <h2>Nik Amirul Aiman Bin Rahmat</h2>
-            <h3>&</h3>
-            <h2>Nor Shazwaney Atiqah Binti Ibrahim</h2>
+            <h2 id="groomName">Nik Amirul Aiman Bin Rahmat</h2>
+            <p>Bersama Pasangannya</p>
+            <h2 id="brideName">Nor Shazwaney Atiqah Binti Ibrahim</h2>
         </div>
 
         <div class="content2">
-            <h4>TEMPAT</h4>
-            <p>El Aisy Garden <br>
+            <h4>TARIKH & HARI</h4>
+            <p id="dateEvent">Jumaat 23.06.2023  <br>
+                bersamaan 5 Zulhijjah 1444H<br>
+            <h4><br>MASA</h4>
+            <p id="timeEvent">8:00 PM - 12:00 AM  <br>
+            <h4><br>LOKASI MAJLIS</h4>
+            <p id="locationEvent">El Aisy Garden <br>
                 LOT 69184A, Jalan Siswi <br>
                 Kampung Sungai Kandis <br>
                 40470 Shah Alam, Selangor </p>
-
-            <h4><br>TARIKH</h4>
-            <p>Jumaat 23.06.2023  <br>
-                bersamaan 5 Zulhijjah 1444H<br>
-
-            <h4><br>MASA</h4>
-            <p>8:00 PM - 12:00 AM  <br>
-            
+  
         </div>
     </div>
 
     <div class="section"  id="section3">
         <div class="content1">
             <h1>Atucara Majlis</h1><br>
-            <p>Kehadiran Tetamu: <br> 8.00 malam</p><br>
-            <p>Ketibaan Pengantin: <br> 8.30 malam</p><br>
-            <p>Makan Beradab: <br> 10.00 malam</p><br>
-            <p>Majlis Berakhir: <br> 12.00 pagi</p><br>
+            <p id="eventTentative">Kehadiran Tetamu: <br> 8.00 malam<br><br><br><br>
+            Ketibaan Pengantin: <br> 8.30 malam<br><br><br><br>
+            Makan Beradab: <br> 10.00 malam<br><br><br><br>
+            Majlis Berakhir: <br> 12.00 pagi<br>
         </div>
 
         <div class="content2">
-            <p>Ya Allah Ya Rahman Ya Rahim, <br>
-                berkatilah majlis perkahwinan ini. <br>
-                Limpahkanlah baraqah dan rahmatMu <br>
-                kepada kedua mempelai ini. Kurniakanlah  <br>
-                mereka kelak zuriat yang soleh dan solehah.  <br>
-                Kekalkanlah jodoh mereka hingga ke jannah. <br><br><br>
+            <p id="eventWishes">Ya Allah Ya Rahman Ya Rahim, <br>
+                Jadikanlah pasangan pengantin ini zuriat <br>
+                yang sempurna soleh dan solehah.<br>
+                Lapangkanlah rezeki pasangan ini semoga hidup  <br>
+                dalam keadaan yang harmoni  <br>
+                dan bahagia sepanjang hayat mereka. <br>
+                Amin Ya Rabbal Alamin. <br><br><br>
                 #AMIRULxWANEY</p><br>
         </div>
     </div>
