@@ -1,601 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Astro Research Lab</title>
+    <link rel="icon" href="img/ARL.png" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Allison&family=Allura&family=Corinthia:wght@400;700&family=Dawning+of+a+New+Day&family=Ephesis&family=Great+Vibes&family=Homemade+Apple&family=Hurricane&family=Imperial+Script&family=Italianno&family=Mr+Dafoe&family=Parisienne&family=Reenie+Beanie&family=Sacramento&family=Shadows+Into+Light&family=Shalimar&family=Square+Peg&family=Sue+Ellen+Francisco&family=Tangerine:wght@400;700&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
-    <title>Scrollable Page with Fixed Button</title>
-    <style>
-        body {
-            margin-bottom: 70px;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        .section {
-            width: 100%;
-            height: 670px;
-            max-width: 360px;
-            margin: 5px auto;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .content {
-            height: 200px;
-        }
-
-        .button-container {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 50px;
-            max-width: 360px;
-            background-color: #c9d1d0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-
-        .button-container button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #c9d1d0;
-            color: #010808;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-
-        .button-container button i,
-        .button-container button img {
-            font-size: 25px;
-            width: 25px;
-            height: auto;
-        }
-
-        .floating-container {
-            display: none;
-            position: fixed;
-            bottom: 100px; /* Adjust as per your desired distance from the bottom */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            height: 400px;
-            max-width: 300px;
-            max-height: 80%;
-            overflow: auto;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 20px;
-            z-index: 9999;
-            border-radius: 20px;
-        }
-
-        #section1 {
-            background-image: url('bg_3_6.png');
-            background-size: cover; /* Cover the entire background */
-            background-repeat: no-repeat; /* Prevent repeating the background image */
-            background-position: center; /* Center the background image */
-            
-        }
-
-        #section2 {
-            background-image: url('bg_3_7.png');
-            background-size: cover; /* Cover the entire background */
-            background-repeat: no-repeat; /* Prevent repeating the background image */
-            background-position: center; /* Center the background image */
-            /* Add other background properties as needed */
-        }
-
-        #section3 {
-            background-image: url('bg_3_7.png');
-            background-size: cover; /* Cover the entire background */
-            background-repeat: no-repeat; /* Prevent repeating the background image */
-            background-position: center; /* Center the background image */
-            /* Add other background properties as needed */
-        }
-
-
-        #section1 .content1 {
-            font-family: 'Allison', cursive, sans-serif; /* Specify a fallback font */
-            font-weight: normal; /* Adjust font weight as needed */
-            text-align: center; /* Center align content */
-            margin-top: 10px; /* Adjust margin top */
-            margin-bottom: 10px; /* Adjust margin bottom */
-            font-size: 24px; /* Adjust the font size as needed */
-            animation: fadeInAnimation 4s ease 1; /* Adjust animation duration and timing */
-        }
-
-        #section1 .content2 {
-            font-family: 'Garamond', serif;
-            text-align: center; /* Center align content */
-            margin-top: 150px; /* Remove margin top */
-            margin-bottom: 0; /* Remove margin bottom */
-            font-size: 9px; /* Adjust the font size as needed */
-            animation: fadeInAnimation 2s ease 1; /* Adjust animation duration and timing */
-        }
-
-        #section1 .content3 {
-            font-family: 'Garamond', serif;
-            text-align: center; /* Center align content */
-            margin-top: 10px; /* Remove margin top */
-            margin-bottom: 0; /* Remove margin bottom */
-            font-size: 9px; /* Adjust the font size as needed */
-            animation: fadeInAnimation 2s ease 1; /* Adjust animation duration and timing */
-        }
-
-        #section2 .content1 {
-            font-family: 'Garamond', serif;
-            text-align: center; /* Center align content */
-            margin-top: 30px; /* Remove margin top */
-            margin-bottom: 0; /* Remove margin bottom */
-            font-size: 10px; /* Adjust the font size as needed */
-            animation: fadeInAnimation 2s ease 1; /* Adjust animation duration and timing */
-        }
-
-        #section2 .content2 {
-            font-family: 'Garamond', serif;
-            text-align: center; /* Center align content */
-            margin-top: 40px; /* Remove margin top */
-            margin-bottom: 0; /* Remove margin bottom */
-            font-size: 12px; /* Adjust the font size as needed */
-            animation: fadeInAnimation 2s ease 1; /* Adjust animation duration and timing */
-        }
-
-        #section3 .content1 {
-            font-family: 'Garamond', serif;
-            text-align: center; /* Center align content */
-            margin-top: 50px; /* Remove margin top */
-            margin-bottom: 0; /* Remove margin bottom */
-            font-size: 12px; /* Adjust the font size as needed */
-        }
-
-        #section3 .content2 {
-            font-family: 'Garamond', serif;
-            text-align: center; /* Center align content */
-            margin-top: 80px; /* Remove margin top */
-            margin-bottom: 0; /* Remove margin bottom */
-            font-size: 12px; /* Adjust the font size as needed */
-        }
-
-        @keyframes fadeInAnimation {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        /* CSS for contact-info */
-        .contact-info {
-            display: flex;
-            justify-content: space-between; /* Align items with space between */
-            align-items: center; /* Align items vertically center */
-        }
-
-        /* CSS for image-box */
-        .image-box {
-            display: flex; /* Use flexbox layout */
-            align-items: center; /* Align items vertically center */
-            justify-content: space-between; /* Align items with space between */
-        }
-
-        /* CSS for image-box img */
-        .image-box img {
-            width: 150px; /* Set width of the image */
-            height: 150px; /* Set height of the image */
-        }
-
-        /* CSS for bx */
-        .bx {
-            margin-left: auto; /* Move the bx element to the right */
-            font-size: 24px;
-        }
-
-
-
-    </style>
+    <link rel="stylesheet" href="style.css">   
 </head>
 <body>
-    <div class="section" id="section1">
-        <div class="content2" >
-            <h1>WALIMATUL URUS</h1>
-        </div>
 
-        <div class="content1" >
-            <h1>Amirul</h1>
-            <h2>&</h2>
-            <h1>Shazwaney</h1>
-            <!-- <p>This is the content of section 1.</p> -->
-            <!-- <p>Scroll down to explore more.</p> -->
-        </div>
+    <div class="light-source"></div>
 
-        <div class="content3" >
-            <h1>JUMAAT 23.6.2023</h1>
-        </div>
+    <header>
+        <!-- <h2 class="logo">Angkasa-X Innovation</h2> -->
+        <img src="img/ASTRO-01.png" alt="Description of image" class="logo">
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="#about-us">About Us</a> <!-- Updated link to the correct id -->
+            <a href="#product">Product</a>
+            <button class="contactbtn" onclick="scrollToSection('contact')">Contact</button>
+        </nav>
+    </header>
 
-    </div>
+<section id="home" class="wrapper">
+    <h1 class="headline">We Are <span class="glow">Designing</span> The Future Of <span class="glow">Satellite</span> <span class="glow">Technology</span> For Your Needs.</h1>
+    <p class="para">Explore the unknown, innovate with passion, and deliver groundbreaking solutions that drive the future of space exploration.</p>
+    <a href="pdf/NebulaHomePage.pdf" target="_blank" class="learnmorebtn">Learn More</a>
+</section>
 
-    <div class="section"  id="section2">
-        <div class="content1">
-            <p>Walimatul Urus</p>
-            <p>Dengan rasa penuh kesyukuran, kami </p>
-            <h2 id="groomFatherName">Rahmat Bin Yusoff</h2>
-            <h3>&</h3>
-            <h2 id="brideFatherName">Nik Rami Hazlinda Binti Mohamed</h2>
-            <br>
-            <p>Menjemput Dato/Datin/Tuan/Puan/Encik/Cik sekeluarga</p>
-            <p>Hadir ke majlis perkahwinan anakanda kami </p>
-            <br>
-            <h2 id="groomName">Nik Amirul Aiman Bin Rahmat</h2>
-            <p>Bersama Pasangannya</p>
-            <h2 id="brideName">Nor Shazwaney Atiqah Binti Ibrahim</h2>
-        </div>
-
-        <div class="content2">
-            <h4>TARIKH & HARI</h4>
-            <p id="dateEvent">Jumaat 23.06.2023  <br>
-                bersamaan 5 Zulhijjah 1444H<br>
-            <h4><br>MASA</h4>
-            <p id="timeEvent">8:00 PM - 12:00 AM  <br>
-            <h4><br>LOKASI MAJLIS</h4>
-            <p id="locationEvent">El Aisy Garden <br>
-                LOT 69184A, Jalan Siswi <br>
-                Kampung Sungai Kandis <br>
-                40470 Shah Alam, Selangor </p>
-  
-        </div>
-    </div>
-
-    <div class="section"  id="section3">
-        <div class="content1">
-            <h1>Atucara Majlis</h1><br>
-            <p id="eventTentative">Kehadiran Tetamu: <br> 8.00 malam<br><br><br><br>
-            Ketibaan Pengantin: <br> 8.30 malam<br><br><br><br>
-            Makan Beradab: <br> 10.00 malam<br><br><br><br>
-            Majlis Berakhir: <br> 12.00 pagi<br>
-        </div>
-
-        <div class="content2">
-            <p id="eventWishes">Ya Allah Ya Rahman Ya Rahim, <br>
-                Jadikanlah pasangan pengantin ini zuriat <br>
-                yang sempurna soleh dan solehah.<br>
-                Lapangkanlah rezeki pasangan ini semoga hidup  <br>
-                dalam keadaan yang harmoni  <br>
-                dan bahagia sepanjang hayat mereka. <br>
-                Amin Ya Rabbal Alamin. <br><br><br>
-                #AMIRULxWANEY</p><br>
-        </div>
-    </div>
-
-    <div class="button-container">
-        <button id="phoneButton" onclick="toggleFloatingContainer('phonefloatingContainer')"><i class='bx bx-phone'></i></button>
-        <button id="rsvpButton" onclick="toggleFloatingContainer('rsvpfloatingContainer')"><img src="rsvp-icon.webp" alt="RSVP Icon"></button>
-        <button id="qrButton" onclick="toggleFloatingContainer('qrfloatingContainer')"><i class='bx bx-qr'></i></button>
-        <button id="giftButton" onclick="toggleFloatingContainer('giftfloatingContainer')"><i class='bx bx-gift' ></i></button>
-        <button id="chatButton" onclick="toggleFloatingContainer('chatfloatingContainer')"><i class='bx bx-chat'></i></button>
-    </div>
-
-    <!-- Floating container for QR code -->
-    <div class="floating-container" id="qrfloatingContainer">
-        <h2 style="text-align: center;">QR Code</h2> 
-        <!-- Your QR code content goes here -->
-        <div style="text-align: center;">
-            <img id="qrCodeImage" src="qr-img.png" alt="QR Code" style="max-width: 200px; max-height: 200px; margin: auto;">
-        </div>
-        <div style="text-align: center;">
-            <h3>Number of Pax: <span id="numberOfPax">0</span></h3>
-        </div>
-        <div style="text-align: center;">
-            <input type="text" id="nameInput" placeholder="Enter your name">
-        </div>
-        <div style="text-align: center;">
-            <input type="text" id="phoneInput" placeholder="Enter your phone number">
-        </div>
-        <div style="text-align: center;">
-            <input type="text" id="eventId" placeholder="Event ID">
-        </div>
-        <br>
-        <div style="text-align: center;">
-            <button onclick="validatePhoneNumber()">Confirm</button>
-        </div>
-
-
-    </div>
+    <section id="about-us">
+        <h1 class="title">ABOUT US</h1>
     
+        <div id="wrapper-container">
+            <div class="wrapper2">
+                <div class="box">
+                    <h2 class="who-we-are">Who we are?</h2>
+                </div>
 
-    <!-- Floating container for Phone code -->
-    <div class="floating-container" id="phonefloatingContainer">
-        <h2>Contact</h2>
-        <div class="contact-info">
-            <h3>Jason</h3>
-            <a href="https://wa.me/1234567890"> <!-- Replace 1234567890 with the actual phone number -->
-                <i class='bx bxl-whatsapp' style='font-size: 24px'></i>
-            </a>
-        </div>
-
-        <div class="contact-info">
-            <h3>Mangum</h3>
-            <a href="https://wa.me/1234567890"> <!-- Replace 1234567890 with the actual phone number -->
-                <i class='bx bxl-whatsapp' style='font-size: 24px'></i>
-            </a>
-        </div>
-    </div>
-
-
-    <!-- Floating container for Gift -->
-    <div class="floating-container" id="giftfloatingContainer">
-        <h2>Gift</h2>
-        <div class="image-box">
-            <img src="test1.png" alt="Test Image">
-            <p1>Buy Now!</p1>
-        </div> <br>
-        <div class="image-box">
-            <img src="test1.png" alt="Test Image">
-            <p1>Buy Now!</p1>
-        </div> <br>
-        <div class="image-box">
-            <img src="test1.png" alt="Test Image">
-            <p1>Buy Now!</p1>
-        </div> <br>
-        <div class="image-box">
-            <img src="test1.png" alt="Test Image">
-            <p1>Buy Now!</p1>
-        </div>
-    </div>
-
-    <!-- Floating container for Chat -->
-    <div class="floating-container" id="chatfloatingContainer">
-        <h2>Wishes</h2>
-        <!-- Input field for event_id -->
-        <input type="text" id="eventIdInput" placeholder="Enter Event ID">
-        <button onclick="getWishList()">Get Wishes</button>
-        <!-- Wish list will be displayed here -->
-    </div>
-
-    <!-- Floating container for RSVP -->
-    <div class="floating-container" id="rsvpfloatingContainer">
-        <h2>RSVP</h2>
-        <div>
-            <button onclick="sendRSVP('yes')">Yes</button>
-            <button onclick="sendRSVP('no')">No</button>
-        </div>
-    </div>
-
-    <div class="floating-container" id="newContainer">
-        <h2>RSVP - Credentials</h2>
-        <div>
-            <h3>Name:</h3>
-            <input type="text" id="rsvpNameInput" placeholder="Enter your name">
-            <h3>Phone Number:</h3>
-            <input type="text" id="rsvpPhoneInput" placeholder="Enter your phone number">
-            <h3>Number of Guests:</h3>
-            <select id="rsvpGuestInput">
-                <option value="1">1 guest</option>
-                <option value="2">2 guests</option>
-                <option value="3">3 guests</option>
-            </select>
-            <h3>Wishes:</h3>
-            <input type="text" id="rsvpWishInput" placeholder="Enter your wish">
-
-            <br><br> <input type="text" id="eventId2" placeholder="Event ID"> <br><br>
-            <button onclick="rsvpAttend()">Submit RSVP</button>
-        </div>
-    </div>
-
-    <script>
-        function toggleFloatingContainer(containerId) {
-            var container = document.getElementById(containerId);
-            if (window.getComputedStyle(container).display === 'none') {
-                closeAllFloatingContainers();
-                container.style.display = 'block';
-            } else {
-                container.style.display = 'none';
-            }
-        }
+                <p class="para">Astro Research Lab is a pioneering satellite manufacturer revolutionizing the aerospace landscape in South East Asia. With a commitment to cutting-edge technology and innovative solutions, they push the boundaries of satellite design, manufacturing, and deployment.</p>
+                <div class="box">
+                    <h2 class="who-we-are">What we do?</h2>
+                </div>
+                <p class="para">Provide advanced Space Systems, including AIS Payload, RGB Cameras, On-Board Computers (OBC), Electrical Power Systems (EPS), and robust satellite structures. As a leading provider of satellite AIS data, we offer customizable AIS data platforms and analytics, along with consultancy services for frequency filing, white papers, and licensing in Malaysia.</p>
+            </div>
     
-        function closeAllFloatingContainers() {
-            var containers = document.getElementsByClassName('floating-container');
-            for (var i = 0; i < containers.length; i++) {
-                containers[i].style.display = 'none';
-            }
-        }
+            <div class="wrapper3">
+                <h2 class="who-we-are"></h2>
+                <img src="img/pic1.png" alt="Description of image" class="image" id="img1">
+                <img src="img/pic2.png" alt="Description of image" class="image" id="img2">
+                <img src="img/pic3.png" alt="Description of image" class="image" id="img3">
+                <div class="indicators">
+                    <span class="indicator" id="indicator1"></span>
+                    <span class="indicator" id="indicator2"></span>
+                    <span class="indicator" id="indicator3"></span>
+                </div>
+            </div>
+    </section>
+
+    <!-- <section id="product">
+        <h1 class="title">PRODUCT</h1>
     
-        document.addEventListener('click', function(event) {
-            var target = event.target;
-            var buttonContainer = document.querySelector('.button-container');
-            var floatingContainers = document.querySelectorAll('.floating-container');
-            if (!buttonContainer.contains(target)) {
-                var clickedInsideContainer = false;
-                floatingContainers.forEach(function(container) {
-                    if (container.contains(target)) {
-                        clickedInsideContainer = true;
-                    }
-                });
-                if (!clickedInsideContainer) {
-                    closeAllFloatingContainers();
-                }
-            }
-        });
+        <div id="wrapper-container2">
+            <div class="horizontal-box">
+                <h1>Horizontal 1</h1>
+
+            </div>
+                
+            <div class="vertical-box">
+                <h1>Vertical 1</h1>
+            </div>
+                
+            <div class="square-box square-box1">
+                <h1>Square 1</h1>
+            </div>
+
+            <div class="square-box square-box2">
+                <h1>Square 2</h1>
+            </div>
+        </div>
+    </section> -->
+
+    <section id="product">
+        <h1 class="title">PRODUCT</h1>
     
-        function validatePhoneNumber() {
-            var name = document.getElementById('nameInput').value;
-            var phoneNumber = document.getElementById('phoneInput').value;
-            var eventId = document.getElementById('eventId').value;
+        <div class="grid">
+            <div class="item">
+                <div class="box2">
+                    <div class="inbox1">
+                        <p>Space</p>
+                    </div>
+                </div>
+
+                <div class="inbox2">
+                    <p>Space Systems</p>
+                </div>
+
+                <div class="inbox3">
+                    <p>Develop and manufacture satellite payloads and subsystems for Low Eart Orbit missions.</p>
+                </div>
+                
+                <div class="grid-3x2">
+                    <div class="item2">
+                        <div class="box1">
+                            <p class="inbox3">AIS Payload</p>
+                        </div>
+                    </div>
+                    <div class="item2">
+                        <div class="box1">
+                            <p class="inbox3">Camera</p>
+                        </div>
+                    </div>
+                    <div class="item2">
+                        <div class="box1">
+                            <p class="inbox3">Structure</p>
+                        </div>
+                    </div>
+                    <div class="item2">
+                        <div class="box1">
+                            <p class="inbox3">EPS</p>
+                        </div>
+                    </div>
+                    <div class="item2">
+                        <div class="box1">
+                            <p class="inbox3">OBC</p>
+                        </div>
+                    </div>
+                    <div class="item2">
+                        <div class="box1">
+                            <p class="inbox3">ADCS</p>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <button class="productbtn">More</button>
+
+            </div>
             
-            // Construct the request body
-            var requestBody = {
-                event_id: eventId,
-                name: name,
-                phone_number: phoneNumber
-            };
 
-            // Make a POST request to the API endpoint
-            var apiUrl = 'https://myp3ktizwggb3izvza4gujuwvi0fqdox.lambda-url.ap-southeast-1.on.aws/phone_validate';
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Extract the auth token and number of guests from the response
-                var authToken = data.auth_token;
-                var numberOfPax = data.guest_num;
+            <div class="item">
+                <div class="box2">
+                    <div class="inbox1">
+                        <p>Regulatory</p>
+                    </div>
+                </div>
 
-                // Update the QR code with the received auth token
-                updateQRCode(authToken);
+                <div class="inbox2">
+                    <p>Regulatory Support</p>
+                </div>
 
-                // Update the number of guests in the "Number of Pax" section
-                document.getElementById('numberOfPax').textContent = numberOfPax;
-            })
-            .catch(error => console.error('Error:', error));
-        }
+                <div class="inbox3">
+                    <p>Our experienced and dedicated team of regulatory professionals can provide full service solutions to any satellite program, regardless of its location.</p>
+                </div>
 
-        function rsvpAttend() {
-            var name = document.getElementById('rsvpNameInput').value;
-            var phoneNumber = document.getElementById('rsvpPhoneInput').value;
-            var guestCount = document.getElementById('rsvpGuestInput').value;
-            var wish = document.getElementById('rsvpWishInput').value;
-            var eventId = document.getElementById('eventId2').value;
-            
-            // Construct the request body
-            var requestBody = {
-                event_id: eventId,
-                name: name,
-                phone_number: phoneNumber,
-                guest: parseInt(guestCount), // Parse guest count as an integer
-                wish: wish
-            };
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>General Info</h3>
+                            <p>General information of Applicant</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot active"></div>
+                        <div class="timeline-content">
+                            <h3>Initial Consultation</h3>
+                            <p>Analyze license possibility on the requested frequency</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Radio License Application</h3>
+                            <p>Describes the Applicant’s General Information</p>
+                        </div>
+                    </div>
+                </div>
 
-            // Make a POST request to the API endpoint
-            var apiUrl = 'https://myp3ktizwggb3izvza4gujuwvi0fqdox.lambda-url.ap-southeast-1.on.aws/attend_rsvp';
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Extract the message from the response
-                var message = data.message;
+                <button class="productbtn">More</button>
+            </div>
 
-                // Display the message to the user
-                alert(message);
-            })
-            .catch(error => console.error('Error:', error));
-        }
+            <div class="item">
+                <div class="box2">
+                    <div class="inbox1">
+                        <p>Data</p>
+                    </div>
+                </div>
 
-        function updateQRCode(authToken) {
-            // Construct the URL for the QR code using the auth token
-            var qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(authToken)}`;
+                <div class="inbox2">
+                    <p>Space Intelligence</p>
+                </div>
 
-            // Update the QR code image source
-            document.getElementById('qrCodeImage').src = qrCodeUrl;
+                <div class="inbox3">
+                    <p>Satellite AIS data provider with customizable AIS data platforms and advanced AIS data analytics.</p>
+                </div>
 
-            // Show the QR code container
-            document.getElementById('qrCodeImage').style.display = 'block';
-        }
+                <button class="productbtn">More</button>
+            </div>
 
-        // Function to reset input fields and QR code image source
-        function resetQRCodeContent() {
-            // Reset input fields
-            document.getElementById('nameInput').value = '';
-            document.getElementById('phoneInput').value = '';
+            <div class="item">
+                <div class="box2">
+                    <div class="inbox1">
+                        <p>Solution</p>
+                    </div>
+                </div>
 
-            // Reset QR code image source
-            document.getElementById('qrCodeImage').src = 'qr-img.png';
-        }
+                <div class="inbox2">
+                    <p>Space Solution</p>
+                </div>
 
-        // Call the reset function when the page loads
-        window.onload = function() {
-            resetQRCodeContent();
-        };
+                <div class="inbox3">
+                    <p>We transform your mission idea into reality.</p>
+                </div>
+                <button class="productbtn1">More</button>
+            </div>
 
-        function sendRSVP(response) {
-        // Get the RSVP floating container
-        var rsvpContainer = document.getElementById('rsvpfloatingContainer');
-        // Get the new container
-        var newContainer = document.getElementById('newContainer');
 
-        if (response === 'yes') {
-            // Hide the current RSVP floating container
-            rsvpContainer.style.display = 'none';
+        </div>
 
-            // Show the new container for name and phone number
-            newContainer.style.display = 'block';
+    </section>
 
-        } else if (response === 'no') {
-            // Handle RSVP for "No" response
-            // You can put your logic here
-        }
-    }
+    <section id="contact" class="wrapper-container2">
+        <h1 class="title">CONTACT</h1>
+            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="4acda19d-20bd-4596-9331-5d47e9d58852">
+                <h2>Leave us A Message!</h2>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+    </section>
 
-        // JavaScript function to trigger animation when section is in viewport
-        function triggerAnimation() {
-            var section = document.getElementById('section2');
-            var sectionPosition = section.getBoundingClientRect().top;
-            var screenHeight = window.innerHeight;
 
-            if (sectionPosition < screenHeight) {
-                // Remove the animate class if it exists
-                section.classList.remove('animate');
-                // Add the animate class again to trigger the animation
-                section.classList.add('animate');
-            }
-        }
-                // Trigger animation when the page loads
-            window.onload = triggerAnimation;
+    <script src="script.js"></script>
 
-            // Trigger animation when scrolling
-            window.addEventListener('scroll', triggerAnimation);
 
-        function getWishList() {
-            const eventId = document.getElementById("eventIdInput").value;
-            if (!eventId) {
-                alert("Please enter an Event ID");
-                return;
-            }
-            fetch(`https://myp3ktizwggb3izvza4gujuwvi0fqdox.lambda-url.ap-southeast-1.on.aws/wish_fetch/${eventId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.message === "Success!") {
-                    const chatFloatingContainer = document.getElementById("chatfloatingContainer");
-                    // Clear existing wish list before appending new wishes
-                    chatFloatingContainer.innerHTML = "<h2>Wishes</h2>";
-                    // Iterate over wishes and append them to the chatFloatingContainer
-                    data.wishes.forEach(wish => {
-                        const wishInfo = document.createElement("p");
-                        wishInfo.textContent = `${wish.name}: ${wish.wish}`;
-                        chatFloatingContainer.appendChild(wishInfo);
-                    });
-                } else {
-                    alert(data.detail);
-                    console.error("Error:", data.detail);
-                }
-            })
-            .catch(error => {
-                alert("Error fetching wish list. Please try again later.");
-                console.error("Error:", error);
-            });
-        }    
-
-    </script>
 </body>
 </html>
