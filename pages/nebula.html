@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Astro Research Lab</title>
+    <link rel="icon" href="../img/ARL.png" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">   
+</head>
+<body>
+
+    <div class="light-source"></div>
+
+    <header>
+        <!-- <h2 class="logo">Angkasa-X Innovation</h2> -->
+        <img src="../img/ASTRO-01.png" alt="Description of image" class="logo">
+        <nav class="navigation">
+            <a href="../index.html">Home</a>
+            <a href="../#about-us">About Us</a> <!-- Updated link to the correct id -->
+            <a href="../#product">Product</a>
+            <button class="contactbtn" onclick="redirectToContact()">Contact</button> <!-- JavaScript function for redirection -->
+        </nav>
+    </header>
+
+    <section id="home" class="wrapper">
+        <div class="content">
+            <div class="text-content">
+                <h1 class="headline">Nebula-3</h1>
+                <h2 class="headline2">Configurable | Reliable | Innovative</h2>
+                <p class="para">Our 3U satellite platform redefines space technology with
+                    its configurable, reliable, and innovative design. Engineered
+                    for flexibility, it supports a wide range of mission profiles
+                    and payloads, ensuring adaptability to various applications.
+                    Built with robust, high-quality components, it delivers
+                    dependable performance in the harshest conditions of
+                    space. At the forefront of technological advancement, it
+                    incorporates the latest innovations to provide cutting-edge
+                    solutions for space exploration and data collection.</p>
+                <a href="../pdf/NebulaHomePage.pdf" target="_blank" class="learnmorebtn">Download Datasheet</a>
+                <a href="../pdf/NebulaHomePage.pdf" target="_blank" class="learnmorebtn"> Get Started</a>
+            </div>
+            <div class="image-content">
+                <img src="../img/nebula.png" alt="Satellite Image">
+            </div>
+        </div>
+    </section>
+
+    <section id="facts" class="facts-section">
+        <h2>Facts about Nebula-3</h2>
+        <div class="facts-container">
+            <div class="fact-item">
+                <h3>30+</h3>
+                <p>Years of design experience</p>
+            </div>
+            <div class="fact-item">
+                <h3>30+</h3>
+                <p>Years of design experience</p>
+            </div>
+            <div class="fact-item">
+                <h3>30+</h3>
+                <p>Years of design experience</p>
+            </div>
+            <div class="fact-item">
+                <h3>30+</h3>
+                <p>Years of design experience</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="home" class="wrapper">
+        <h1 class="headline">What do you need to know about Nebula-3</h1>
+        <div class="content">
+            <div class="text-content">
+                <p class="para">The platform allows flexible configuration with modular payload
+                    integration, accommodating various mission needs like
+                    communication, remote sensing, and scientific research. Equipped
+                    with robust onboard computers, the platform manages complex tasks
+                    with fault-tolerant design to ensure reliable operation. Efficient power
+                    management is achieved through solar panels and advanced battery
+                    systems, supporting long-term missions. The satellite includes highbandwidth
+                    communication systems for reliable data transmission and
+                    reception, enabling real-time ground station communication</p>
+            </div>
+            <div class="image-content">
+                <img src="../img/nebula_sub.png" alt="Satellite Image">
+            </div>
+        </div>
+    </section>
+
+    <div class="image-content2">
+        <img src="../img/nebula_sub2.jpg" alt="Satellite Image">
+    </div>
+
+    <!-- <section id="mission-profiles" class="wrapper">
+        <h2 class="headline3">Nebula-3 configurable platform supports a wide range of mission profiles including</h2>
+        <div class="mission-grid">
+            <div class="mission-item">
+                <img src="../img/eo.png" alt="Earth Observation">
+                <p>Earth Observation</p>
+            </div>
+            <div class="mission-item">
+                <img src="../img/telecom.png" alt="Telecommunication">
+                <p>Telecommunication</p>
+            </div>
+            <div class="mission-item">
+                <img src="../img/eo.png" alt="M2M">
+                <p>M2M</p>
+            </div>
+            <div class="mission-item">
+                <img src="../img/eo.png" alt="Scientific Mission">
+                <p>Scientific Mission</p>
+            </div>
+            <div class="mission-item">
+                <img src="../img/eo.png" alt="In-orbit Demonstration">
+                <p>In-orbit Demonstration</p>
+            </div>
+            <div class="mission-item">
+                <img src="../img/eo.png" alt="Situational Awareness">
+                <p>Situational Awareness</p>
+            </div>
+        </div>
+    </section> -->
+
+    <section id="configure" class="wrapper">
+        <div class="content">
+            <div class="text-content">
+                <h1 class="headline4">Configure your Nebula-3</h1>
+                <p class="para">The Nebula-3 platform is highly adaptable, featuring a
+                    modular design that allows for customization based on
+                    various factors. Every mission has its own distinct
+                    needs, goals, and specifications, and your mission is
+                    no diHerent. You can modify it to accommodate your
+                    payload's size or mass, adjust power requirements,
+                    orbit selection, configure communication systems,
+                    and tailor attitude control and navigation features to
+                    meet your mission's precise demands.</p>
+            </div>
+            <div class="text-content">
+                <h1 class="headline4">The Nebula-3 Specification</h1>
+                <ul class="specification-list">
+                    <li>3U Standard CubeSat Satellite</li>
+                    <li>Total weight: &lt; 4kg</li>
+                    <li>Design Lifetime: Minimum 2 Years</li>
+                    <li>Design orbit: Low Earth Orbit (LEO)</li>
+                    <li>Attitude Control: 3-axis control with Reaction Wheel and Star tracker</li>
+                    <li>Payload Mass: &lt; 1.5kg</li>
+                    <li>Payload volume: 1U</li>
+                    <li>Payload Data data-rate: up to 250Mbps</li>
+                    <li>Payload power: 24W</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+
+</body>
+</html>
